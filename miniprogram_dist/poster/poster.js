@@ -22,6 +22,7 @@ Poster.create = () => {
     if (!poster) {
         console.error('请设置组件的id="poster"!!!');
     } else {
+        console.log(Poster())
         return Poster().onCreate();
     }
 }

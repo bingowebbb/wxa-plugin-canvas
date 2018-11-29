@@ -17,9 +17,11 @@ Component({
         if (this.data.preload) {
             const poster = this.selectComponent('#poster');
             this.downloadStatus = 'doing';
+            console.log(this.data)
             poster.downloadResource(this.data.config.images).then(() => {
                 this.downloadStatus = 'success';
                 this.trigger('downloadSuccess');
+                this.onCreate()
             }).catch((e) => {
                 this.downloadStatus = 'fail';
                 this.trigger('downloadFail', e);

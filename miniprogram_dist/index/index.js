@@ -68,8 +68,19 @@ const main = {
      * @param {Object} params
      */
     drawText(params) {
-        const { x, y, fontSize, color, baseLine, textAlign, text, opacity = 1, width, lineNum, lineHeight } = params;
-        if (Object.prototype.toString.call(text) === '[object Array]') {
+        const { x, y, fontSize, color, baseLine, textAlign, text, opacity = 1, width, lineNum, lineHeight, direction } = params;
+        // 增加竖向文字
+        if (direction === 'vertical') {
+          const textArr = text.split('')
+          textArr.forEach((item, index) => {
+            this._drawSingleText(
+              Object.assign(params, {
+                text: item,
+                y: y + lineHeight * index,
+              })
+            )
+          })
+        } else if (Object.prototype.toString.call(text) === '[object Array]') {
             let preText = { x, y, baseLine };
             text.forEach(item => {
                 preText.x += item.marginLeft || 0;
@@ -348,6 +359,8 @@ const helper = {
         return rawUrl;
     },
 }
+
+
 Component({
     properties: {
     },
@@ -359,7 +372,6 @@ Component({
     methods: Object.assign({
         create(config) {
             this.ctx = wx.createCanvasContext('canvasid', this);
-
             this.initCanvas(config.width, config.height, config.debug)
                 .then(() => {
                     // 设置画布底色

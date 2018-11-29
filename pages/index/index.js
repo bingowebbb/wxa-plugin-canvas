@@ -33,7 +33,7 @@ Page({
                     x: 113,
                     y: 61,
                     baseLine: 'middle',
-                    text: '伟仔',
+                    text: '冰哥哥',
                     fontSize: 32,
                     color: '#8d8d8d',
                 },
@@ -283,6 +283,8 @@ Page({
      * 异步生成海报
      */
     onCreatePoster() {
-        Poster.create();
+        console.log(1234)
+        // Poster.create();
+        // Poster().onCreate()
     }
 })
